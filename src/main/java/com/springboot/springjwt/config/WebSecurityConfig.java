@@ -16,10 +16,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private final CustomUserDetailsService customUserDetailsService;
+    private final JwtAuthenticationFilter jwtFilter;
+
     @Autowired
-    private CustomUserDetailsService customUserDetailsService;
-    @Autowired
-    private JwtAuthenticationFilter jwtFilter;
+    public WebSecurityConfig(CustomUserDetailsService customUserDetailsService, JwtAuthenticationFilter jwtFilter) {
+        this.customUserDetailsService = customUserDetailsService;
+        this.jwtFilter = jwtFilter;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
